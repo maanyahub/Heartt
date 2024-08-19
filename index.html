@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shreyansh's Heart for Waanya</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ffebee;
+            font-family: Arial, sans-serif;
+        }
+        .heart {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            background-color: #ff4081;
+            transform: rotate(45deg);
+            cursor: pointer;
+        }
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background-color: #ff4081;
+            border-radius: 50%;
+        }
+        .heart::before {
+            left: -150px;
+        }
+        .heart::after {
+            top: -150px;
+        }
+        .door {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #ff4081;
+            transform-origin: left;
+            transition: transform 1s;
+        }
+        .open {
+            transform: perspective(1200px) rotateY(-105deg);
+        }
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+        .content.visible {
+            opacity: 1;
+        }
+        .image-container {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .image-container img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            transition: transform 1s;
+            transform: scale(0);
+        }
+        .image-container.visible img {
+            transform: scale(1);
+        }
+        .button {
+            background-color: #4caf50;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .final-image {
+            display: none;
+            max-width: 200px;
+            margin-top: 20px;
+        }
+        .final-image.visible {
+            display: block;
+        }
+        .caption {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="heart">
+        <div class="door"></div>
+        <div class="content">
+            <div class="image-container">
+                <img src="/api/placeholder/80/80" alt="Waanya 1">
+                <img src="/api/placeholder/80/80" alt="Waanya 2">
+                <img src="/api/placeholder/80/80" alt="Waanya 3">
+            </div>
+            <button class="button smile-button">Smile, idiot!</button>
+            <img src="/api/placeholder/200/200" alt="Waanya smiling" class="final-image smile-image">
+            <button class="button beautiful-button" style="display: none;">The most beautiful one</button>
+            <img src="/api/placeholder/200/200" alt="Waanya beautiful" class="final-image beautiful-image">
+            <p class="caption"></p>
+        </div>
+    </div>
+
+    <script>
+        const heart = document.querySelector('.heart');
+        const door = document.querySelector('.door');
+        const content = document.querySelector('.content');
+        const imageContainer = document.querySelector('.image-container');
+        const smileButton = document.querySelector('.smile-button');
+        const beautifulButton = document.querySelector('.beautiful-button');
+        const smileImage = document.querySelector('.smile-image');
+        const beautifulImage = document.querySelector('.beautiful-image');
+        const caption = document.querySelector('.caption');
+
+        heart.addEventListener('click', () => {
+            door.classList.add('open');
+            setTimeout(() => {
+                content.classList.add('visible');
+                setTimeout(() => {
+                    imageContainer.classList.add('visible');
+                }, 500);
+            }, 500);
+        });
+
+        smileButton.addEventListener('click', () => {
+            imageContainer.style.display = 'none';
+            smileButton.style.display = 'none';
+            smileImage.classList.add('visible');
+            caption.textContent = "This is actually the core of Shreyansh's heart";
+            beautifulButton.style.display = 'inline-block';
+        });
+
+        beautifulButton.addEventListener('click', () => {
+            smileImage.classList.remove('visible');
+            beautifulButton.style.display = 'none';
+            beautifulImage.classList.add('visible');
+            caption.textContent = "You are the most beautiful person in my world, Waanya!";
+        });
+    </script>
+</body>
+</html>
