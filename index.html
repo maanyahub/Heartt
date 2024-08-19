@@ -21,6 +21,7 @@
             background-color: #ff4081;
             transform: rotate(45deg);
             cursor: pointer;
+            z-index: 1;
         }
         .heart::before,
         .heart::after {
@@ -44,6 +45,7 @@
             background-color: #ff4081;
             transform-origin: left;
             transition: transform 1s;
+            z-index: 2;
         }
         .open {
             transform: perspective(1200px) rotateY(-105deg);
@@ -56,6 +58,7 @@
             text-align: center;
             opacity: 0;
             transition: opacity 1s;
+            z-index: 3;
         }
         .content.visible {
             opacity: 1;
@@ -158,3 +161,4 @@
     </script>
 </body>
 </html>
+        
